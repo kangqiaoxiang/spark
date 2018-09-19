@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+
+<Appenders>
+		<RollingFile name="RollingFileInfo" fileName="D:/logs/guideweb/info.log"
+                     filePattern="D:/logs/guideweb/info-%d{yyyy-MM-dd}-%i.log.zip"
+                     append="false">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+	
+		<RollingFile name="RollingFileWarn" fileName="D:/logs/guideweb/warn.log"
+                     filePattern="D:/logs/guideweb/warn-%d{yyyy-MM-dd}-%i.log.zip"
+                     append="false">
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+        
+        <RollingFile name="RollingFileError" fileName="D:/logs/guideweb/error.log"
+                     filePattern="D:/logs/guideweb/error-%d{yyyy-MM-dd}-%i.log.zip"
+                     append="false">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+        
+        <RollingFile name="RollingFileTimeOut" fileName="D:/logs/guideweb/timeout.log"
+                     filePattern="D:/logs/guideweb/timeout-%d{yyyy-MM-dd}-%i.log.zip"
+                     append="false">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<root level="info">
+            <appender-ref ref="RollingFileInfo"/>
+			<appender-ref ref="RollingFileWarn"/>
+            <appender-ref ref="RollingFileError"/>
+	    </root>
+	    
+	    <logger name="timeout" level="trace" additivity="false">
+			<appender-ref ref="RollingFileTimeOut"/>
+		</logger>
+	</Loggers>
+
+</Configuration>
